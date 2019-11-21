@@ -1,0 +1,102 @@
+#服务器的端口号
+server:
+  port: 8888
+
+#行内对象配置（用的少）
+person: {name: wuid,age: 23}
+
+name: zhangsan
+
+#配置集合，数组
+city:
+  - beijing
+  - shanghai
+
+student:
+  - name: jax
+    age: 23
+  - name: amdin
+    age: 22
+
+###配置启动所用的监控端点，默认情况下这些端点是禁用的
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
+#数据库连接 如果mysql账号密码出错，在项目启动时候是不会报错（底层采用懒加载）
+spring:
+  profiles:
+    active: prod
+  #datasource:
+      #test1:
+         #url: jdbc:mysql://localhost:3306/datasource1?serverTimezone=GMT%2B8&allowMultiQueries=true
+         #driver-class-name: com.mysql.cj.jdbc.Driver
+         #username: root
+         #password: 123456
+      #test2:
+         #url: jdbc:mysql://localhost:3306/datasource2?serverTimezone=GMT%2B8&allowMultiQueries=true
+         #driver-class-name: com.mysql.cj.jdbc.Driver
+         #username: root
+         #password: 123456
+  datasource:
+    url: jdbc:mysql://localhost:3306/springboot?serverTimezone=GMT%2B8&allowMultiQueries=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+  jpa:
+    database: mysql
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+  thymeleaf:
+    #模板的模式，支持 HTML, XML TEXT JAVASCRIPT
+    mode: HTML5
+    #编码 可不用配置
+    encoding: UTF-8
+    #开发配置为false,避免修改模板还要重启服务器
+    cache: false
+    #配置模板路径，默认是templates，可以不用配置
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0
+    timeout: 2000
+    jedis:
+      pool:
+        max-active: 5
+        max-idle: 5
+        min-idle: 0
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/database
+
+mybatis:
+  type-aliases-package: com.charon.boot.model
+  mapper-locations: classpath:mapper/*.xml
+
+
+##接口相当在配置文件中，配置相关info开头的配置文件
+info:
+  name: charon
+  admin: sysUser
+
+#日志打印
+#logging:
+#  config: classpath:log/logback-spring.xml
+#  path: D:/log
