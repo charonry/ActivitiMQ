@@ -1,0 +1,13 @@
+server:
+  port: 7778
+spring:
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+  jms:
+    pub-sub-domain: false #flase queue   true topic
+
+#自定义队列名
+myqueue:  boot-activemq-queue
+
